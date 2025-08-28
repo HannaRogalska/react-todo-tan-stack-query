@@ -1,19 +1,30 @@
-import { getTodos } from '../../services/todoApi'
+import { getTodos, deleteTodo } from "../../services/todoApi";
 
 
 const ListItemsTodo = () => {
   const todos = getTodos();
+  const deleteT = deleteTodo()
+  console.log(deleteT);
+  
+
   if (todos.isLoading) return <h1>Loading...</h1>
   if (todos.isError) return <h1>Error...</h1>;
   console.log(todos);
   
   return (
-    <ul>
+    <ol>
       {todos.data?.map((todo) => {
-        return <li key={todo.id}>{ todo.title}</li>
+        return (
+          <li key={todo.id}>
+            {todo.title}
+            <button onClick={() => deleteT.mutate(todo.id)}>
+              {deleteT.isPending ? "Deleting..." : "Delete"}
+            </button>
+          </li>
+        );
       })}
       
-    </ul>
+    </ol>
   )
 }
 
