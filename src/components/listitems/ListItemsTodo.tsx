@@ -4,12 +4,8 @@ import { getTodos, deleteTodo } from "../../services/todoApi";
 const ListItemsTodo = () => {
   const todos = getTodos();
   const deleteT = deleteTodo()
-  console.log(deleteT);
-  
-
   if (todos.isLoading) return <h1>Loading...</h1>
   if (todos.isError) return <h1>Error...</h1>;
-  console.log(todos);
   
   return (
     <ol>
