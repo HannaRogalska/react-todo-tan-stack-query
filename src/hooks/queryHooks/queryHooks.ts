@@ -11,3 +11,12 @@ export const fetchTodos = async (): Promise<Todo[]> => {
 export const removeTodo = async (id: number): Promise<void> => {
   await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
 };
+export const toggleTodo = async (data: Todo): Promise<Todo[]> => {
+  const res = await axios.put(
+    `https://jsonplaceholder.typicode.com/todos/${data.id}`,
+    {
+      completed: !data.completed,
+    }
+  );
+  return res.data;
+};

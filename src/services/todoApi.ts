@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchTodos, removeTodo } from "../hooks/queryHooks/queryHooks";
+import {
+  fetchTodos,
+  removeTodo,
+  toggleTodo,
+} from "../hooks/queryHooks/queryHooks";
 import type { Todo } from "../types/todoType";
 
 export const getTodos = () => {
@@ -17,7 +21,6 @@ export const deleteTodo = () => {
     onMutate: async (id: number) => {
       await queryClient.cancelQueries({ queryKey: ["todos"] });
       const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
-      console.log(previousTodos);
       queryClient.setQueryData(["todos"], (old: Todo[]) =>
         old?.filter((t) => t.id !== id)
       );
@@ -27,6 +30,28 @@ export const deleteTodo = () => {
       queryClient.setQueryData(["todos"], context?.previousTodos);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+};
+export const toggleTodoItem = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: toggleTodo,
+    onMutate: async (data: Todo) => {
+      await queryClient.cancelQueries({ queryKey: ["todos"] });
+      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
+      queryClient.setQueryData(["todos"], (oldData:Todo[]) =>
+        oldData?.map((t) =>
+          t.id === data.id ? { ...t, completed: !t.completed } : t
+        )
+      );
+      return { previousTodos };
+    },
+    onError(error, variables, context) {
+      queryClient.setQueryData(["todos"], context?.previousTodos);
+    },
+    onSettled() {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
