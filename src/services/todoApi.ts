@@ -3,17 +3,29 @@ import { fetchTodos, removeTodo } from "../hooks/queryHooks/queryHooks";
 import type { Todo } from "../types/todoType";
 
 export const getTodos = () => {
-  const { data, isLoading, isError } = useQuery<Todo[]>({
+  return useQuery<Todo[]>({
     queryKey: ["todos"],
     queryFn: fetchTodos,
   });
-  return { data, isLoading, isError };
 };
 
 export const deleteTodo = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: removeTodo,
+    onMutate: async (id: number) => {
+      await queryClient.cancelQueries({ queryKey: ["todos"] });
+      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
+      console.log(previousTodos);
+      queryClient.setQueryData(["todos"], (old: Todo[]) =>
+        old?.filter((t) => t.id !== id)
+      );
+      return { previousTodos };
+    },
+    onError(error, id, context) {
+      queryClient.setQueryData(["todos"], context?.previousTodos);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
