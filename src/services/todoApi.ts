@@ -3,6 +3,7 @@ import {
   fetchTodos,
   removeTodo,
   toggleTodo,
+  postTodo,
 } from "../hooks/queryHooks/queryHooks";
 import type { Todo } from "../types/todoType";
 
@@ -41,7 +42,7 @@ export const toggleTodoItem = () => {
     onMutate: async (data: Todo) => {
       await queryClient.cancelQueries({ queryKey: ["todos"] });
       const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
-      queryClient.setQueryData(["todos"], (oldData:Todo[]) =>
+      queryClient.setQueryData(["todos"], (oldData: Todo[]) =>
         oldData?.map((t) =>
           t.id === data.id ? { ...t, completed: !t.completed } : t
         )
@@ -55,4 +56,33 @@ export const toggleTodoItem = () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
+};
+
+export const addTodo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: postTodo,
+    onMutate: (data) => {
+      queryClient.cancelQueries({ queryKey: ["todos"] });
+      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
+      queryClient.setQueryData(["todos"], (oldTodos: Todo[]) => {
+        return [
+          ...oldTodos,
+          {
+            id: Date.now(),
+            userId: Date.now(),
+            title: data,
+            completed: false,
+          },
+        ];
+      });
+      return { previousTodos };
+    },
+    onError: (err, newTodo, context) => {
+      queryClient.setQueryData(["todos"], context?.previousTodos);
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
+  
+  
 };

@@ -20,3 +20,15 @@ export const toggleTodo = async (data: Todo): Promise<Todo[]> => {
   );
   return res.data;
 };
+export const postTodo = async (data: string): Promise<Todo> => {
+  const res = await axios.post(
+    `https://jsonplaceholder.typicode.com/todos`,
+    {
+      userId: Date.now(),
+      id: Date.now(),
+      title: data,
+      completed: false,
+    }
+  );
+  return res.data;
+};
