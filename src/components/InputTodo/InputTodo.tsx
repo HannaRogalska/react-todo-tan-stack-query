@@ -1,22 +1,25 @@
-import { useState, type ChangeEvent } from "react"
-import {addTodo} from "../../services/todoApi"
+import { addTodo } from "../../services/todoApi";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import type { FormValues } from "../../types/formType";
 
 const InputTodo = () => {
-    const [inputValue, setInputValue] = useState('')
-    console.log(inputValue);
-    const addNewTodo = addTodo()
+ const saveInputData = addTodo()
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const saveData: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+    saveInputData.mutate(data.title)
+    reset()
+  };
+  console.log(handleSubmit);
+  
+  
   return (
-    <div>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setInputValue(e.target.value)
-        }
-      ></input>
-          <button onClick={() => addNewTodo.mutate( inputValue)}>Add todo</button>
-    </div>
-  );
-}
+    <form onSubmit={handleSubmit(saveData)}>
+      <input {...register("title", { required: true, maxLength: 20 })} />
 
-export default InputTodo
+      <input type="submit" />
+    </form>
+  );
+};
+
+export default InputTodo;
