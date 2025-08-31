@@ -1,3 +1,5 @@
 export type FormValues = {
-  title: string;
+  firstName: string;
+  gender: string;
+  opinion: string
 };
