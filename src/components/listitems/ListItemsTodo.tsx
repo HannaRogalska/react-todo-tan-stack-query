@@ -9,7 +9,7 @@ const ListItemsTodo = () => {
   if (todos.isError) return <h1>Error...</h1>;
   
   return (
-    <ol>
+    <ol className="list-decimal list-inside">
       {todos.data?.map((todo) => {
         return (
           <li key={todo.id}>
@@ -25,9 +25,8 @@ const ListItemsTodo = () => {
           </li>
         );
       })}
-      
     </ol>
-  )
+  );
 }
 
 export default ListItemsTodo
