@@ -4,10 +4,11 @@ import { useAppDispatch } from "../../hooks/reduxHooks/reduxHooks";
 import {addOpinion} from '../../features/form/formSlice'
 
 const Form = () => {
-    const { register, handleSubmit } = useForm<FormValues>();
+    const { register, handleSubmit, reset } = useForm<FormValues>();
     const dispatch = useAppDispatch()
     const onSubmit: SubmitHandler<FormValues> = (data) => {
       dispatch(addOpinion(data));
+      reset()
     };
     return (
       <form
@@ -15,7 +16,11 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label htmlFor="firstName">First Name</label>
-        <input id="firstName" {...register("firstName")} />
+        <input
+          id="firstName"
+          {...register("firstName")}
+          className="text-center w-[150px] border border-solid rounded-lg outline-none "
+        />
         <label htmlFor="gender">Gender Selection</label>
         <select
           id="gender"
@@ -31,7 +36,10 @@ const Form = () => {
           className="w-[350px] border border-solid rounded-lg outline-none p-2"
           {...register("opinion")}
         />
-        <input type="submit" />
+        <input
+          type="submit"
+          className="w-[350px] border border-solid rounded-lg outline-none p-2"
+        />
       </form>
     );
 };
