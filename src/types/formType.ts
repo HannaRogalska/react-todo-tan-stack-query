@@ -3,3 +3,6 @@ export type FormValues = {
   gender: string;
   opinion: string
 };
+export type TodoValues = {
+  title: string
+}

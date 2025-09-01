@@ -1,23 +1,29 @@
 import { addTodo } from "../../services/todoApi";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { FormValues } from "../../types/formType";
+import type { TodoValues } from "../../types/formType";
 
 const InputTodo = () => {
  const saveInputData = addTodo()
-  const { register, handleSubmit, reset } = useForm<FormValues>();
-  const saveData: SubmitHandler<FormValues> = (data) => {
+  const { register, handleSubmit, reset } = useForm<TodoValues>();
+  const saveData: SubmitHandler<TodoValues> = (data) => {
     console.log(data);
-    saveInputData.mutate(data.title)
-    reset()
+    saveInputData.mutate(data.title);
+    reset();
   };
   console.log(handleSubmit);
   
   
   return (
     <form onSubmit={handleSubmit(saveData)}>
-      <input {...register("title", { required: true, maxLength: 20 })} />
+      <input
+        {...register("title", { required: true, maxLength: 20 })}
+        className="text-center w-[350px] border border-solid rounded-lg outline-none mr-2 "
+      />
 
-      <input type="submit" />
+      <input
+        type="submit"
+        className="text-center w-[100px] border border-solid rounded-lg outline-none "
+      />
     </form>
   );
 };

@@ -1,7 +1,14 @@
+import InputTodo from "../../components/InputTodo/InputTodo"
+import ListItemsTodo from "../../components/listitems/ListItemsTodo"
 
 
 const TodoPage = () => {
-  return <div>TodoPage</div>;
+  return (
+    <>
+      <InputTodo />
+      <ListItemsTodo />
+    </>
+  );
 }
 
 export default TodoPage
