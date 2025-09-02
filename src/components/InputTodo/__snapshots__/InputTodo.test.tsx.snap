@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input-Todo > snapShot 1`] = `
+<div>
+  <form>
+    <input
+      class="text-center w-[350px] border border-solid rounded-lg outline-none mr-2 "
+      name="title"
+    />
+    <input
+      class="text-center w-[100px] border border-solid rounded-lg outline-none "
+      type="submit"
+    />
+  </form>
+</div>
+`;
