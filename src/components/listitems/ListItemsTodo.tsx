@@ -2,15 +2,15 @@ import { getTodos, deleteTodo, toggleTodoItem } from "../../services/todoApi";
 
 
 const ListItemsTodo = () => {
-  const todos = getTodos();
+  const {data, isLoading, isError} = getTodos();
   const deleteT = deleteTodo()
   const checkFn = toggleTodoItem()
-  if (todos.isLoading) return <h1>Loading...</h1>
-  if (todos.isError) return <h1>Error...</h1>;
+  if (isLoading) return <h1>Loading...</h1>
+  if (isError) return <h1>Error...</h1>;
   
   return (
     <ol className="list-decimal list-inside">
-      {todos.data?.map((todo) => {
+      {data?.map((todo) => {
         return (
           <li key={todo.id}>
             {todo.title}
