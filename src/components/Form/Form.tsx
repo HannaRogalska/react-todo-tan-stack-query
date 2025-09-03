@@ -14,6 +14,7 @@ const Form = () => {
       <form
         className="flex gap-1 flex-col items-center w-[450px] border border-solid rounded-lg p-4"
         onSubmit={handleSubmit(onSubmit)}
+        aria-label="feedback form"
       >
         <label htmlFor="firstName">First Name</label>
         <input
