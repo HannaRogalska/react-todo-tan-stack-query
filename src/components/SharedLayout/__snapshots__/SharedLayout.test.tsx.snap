@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Shared > render comp 1`] = `
+<div>
+  <div>
+    <header />
+    <main />
+    <footer />
+  </div>
+</div>
+`;
+
+exports[`Shared > render componen 1`] = `
+<div>
+  <div>
+    <header />
+    <main />
+    <footer />
+  </div>
+</div>
+`;
+
+exports[`Shared > render components 1`] = `
+<div>
+  <div>
+    <header />
+    <main />
+    <footer />
+  </div>
+</div>
+`;
+
+exports[`Shared > renders 1`] = `
+<div>
+  <div>
+    <header />
+    <main />
+    <footer />
+  </div>
+</div>
+`;
