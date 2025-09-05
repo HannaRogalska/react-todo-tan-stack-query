@@ -29,6 +29,13 @@ describe("query hooks", () => {
       },
     ]);
   });
-  
-    
+
+  it("remove todo", async () => {
+    (axios.delete as Mock).mockResolvedValue({});
+    await removeTodo(1);
+    expect(axios.delete).toBeCalledTimes(1);
+    expect(axios.delete).toBeCalledWith(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+  });
 });
