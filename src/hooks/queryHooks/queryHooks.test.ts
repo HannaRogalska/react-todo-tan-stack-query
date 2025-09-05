@@ -1,5 +1,5 @@
 import { describe, it, vi, expect, type Mock } from "vitest";
-import { fetchTodos, removeTodo, toggleTodo } from "./queryHooks";
+import { fetchTodos, removeTodo, toggleTodo, postTodo } from "./queryHooks";
 import type { Todo } from "../../types/todoType";
 
 import axios from "axios";
@@ -38,33 +38,53 @@ describe("query hooks", () => {
       "https://jsonplaceholder.typicode.com/todos/1"
     );
   });
-    it('toggle', async() => {
-        (axios.put as Mock).mockResolvedValue( {data: {
+  it("toggle", async () => {
+    (axios.put as Mock).mockResolvedValue({
+      data: {
         userId: 1,
         id: 23,
         title: "some",
         completed: true,
-      } } );
-      const todo = {
+      },
+    });
+    const todo = {
+      userId: 1,
+      id: 23,
+      title: "some",
+      completed: false,
+    };
+    const toggledTodo = await toggleTodo({ ...todo });
+
+    expect(axios.put).toBeCalledTimes(1);
+    expect(toggledTodo).toEqual({
+      userId: 1,
+      id: 23,
+      title: "some",
+      completed: true,
+    });
+    expect(axios.put).toBeCalledWith(
+      `https://jsonplaceholder.typicode.com/todos/23`,
+      {
+        completed: !todo.completed,
+      }
+    );
+  });
+  it("post todo", async () => {
+    (axios.post as Mock).mockResolvedValue({
+      data: {
         userId: 1,
         id: 23,
         title: "some",
-        completed: false,
-      };
-        const toggledTodo = await toggleTodo({ ...todo } );
-        
-        expect(axios.put).toBeCalledTimes(1);
-        expect(toggledTodo).toEqual({
-          userId: 1,
-          id: 23,
-          title: "some",
-          completed: true,
-        });
-        expect(axios.put).toBeCalledWith(
-          `https://jsonplaceholder.typicode.com/todos/23`,
-          {
-            completed: !todo.completed,
-          }
-        );
-    })
+        completed: true,
+      },
+    });
+    const newTodo = await postTodo("some");
+    expect(axios.post).toBeCalledTimes(1);
+    expect(newTodo).toEqual({
+      userId: 1,
+      id: 23,
+      title: "some",
+      completed: true,
+    });
+  });
 });
