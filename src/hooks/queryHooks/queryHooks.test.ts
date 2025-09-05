@@ -38,4 +38,33 @@ describe("query hooks", () => {
       "https://jsonplaceholder.typicode.com/todos/1"
     );
   });
+    it('toggle', async() => {
+        (axios.put as Mock).mockResolvedValue( {data: {
+        userId: 1,
+        id: 23,
+        title: "some",
+        completed: true,
+      } } );
+      const todo = {
+        userId: 1,
+        id: 23,
+        title: "some",
+        completed: false,
+      };
+        const toggledTodo = await toggleTodo({ ...todo } );
+        
+        expect(axios.put).toBeCalledTimes(1);
+        expect(toggledTodo).toEqual({
+          userId: 1,
+          id: 23,
+          title: "some",
+          completed: true,
+        });
+        expect(axios.put).toBeCalledWith(
+          `https://jsonplaceholder.typicode.com/todos/23`,
+          {
+            completed: !todo.completed,
+          }
+        );
+    })
 });
