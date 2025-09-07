@@ -8,8 +8,9 @@ exports[`Input-Todo > snapShot 1`] = `
       name="title"
     />
     <input
-      class="text-center w-[100px] border border-solid rounded-lg outline-none "
+      class="text-center w-[100px] border border-solid rounded-lg outline-none"
       type="submit"
+      value="Add Todo"
     />
   </form>
 </div>

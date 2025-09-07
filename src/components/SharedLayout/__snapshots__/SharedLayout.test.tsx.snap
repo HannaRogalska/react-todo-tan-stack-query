@@ -1,41 +1,60 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Shared > render comp 1`] = `
-<div>
-  <div>
-    <header />
-    <main />
-    <footer />
-  </div>
-</div>
-`;
-
-exports[`Shared > render componen 1`] = `
-<div>
-  <div>
-    <header />
-    <main />
-    <footer />
-  </div>
-</div>
-`;
-
-exports[`Shared > render components 1`] = `
-<div>
-  <div>
-    <header />
-    <main />
-    <footer />
-  </div>
-</div>
-`;
-
 exports[`Shared > renders 1`] = `
 <div>
-  <div>
-    <header />
-    <main />
-    <footer />
+  <div
+    class="flex flex-col min-h-screen"
+  >
+    <header
+      class="flex  justify-between items-center p-[30px]"
+    >
+      <img
+        class="w-[40px]"
+        src="https://cdn-icons-png.freepik.com/256/13077/13077693.png?semt=ais_white_label"
+      />
+      <ul
+        class="flex justify-between items-center gap-2"
+      >
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            data-discover="true"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/form"
+          >
+            Form
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/todo"
+          >
+            Todo
+          </a>
+        </li>
+      </ul>
+    </header>
+    <main
+      class="flex-1"
+    />
+    <footer
+      class="p-2"
+    >
+      <span>
+        © 2025 Todo App
+      </span>
+    </footer>
   </div>
 </div>
 `;

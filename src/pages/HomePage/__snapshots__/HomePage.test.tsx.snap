@@ -2,8 +2,19 @@
 
 exports[`HomePage > matcher snapshot 1`] = `
 <div>
-  <div>
-    home
+  <div
+    class="flex flex-col items-center"
+  >
+    <h1
+      class="text-4xl font-bold mb-4"
+    >
+      Organize Your Day
+    </h1>
+    <p
+      class=" mb-8 max-w-xl"
+    >
+      Create, manage, and complete your tasks easily. Stay productive and keep track of everything in one place.
+    </p>
   </div>
 </div>
 `;

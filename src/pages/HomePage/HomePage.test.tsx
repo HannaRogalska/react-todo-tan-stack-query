@@ -5,7 +5,7 @@ import HomePage from "./HomePage";
 describe("HomePage", () => {
   it("render text", () => {
       render(<HomePage />);
-    expect(screen.getByText("home")).toBeInTheDocument();
+    expect(screen.getByText("Organize Your Day")).toBeInTheDocument();
   });
   it("matcher snapshot", () => {
       const { container } = render(<HomePage />);
