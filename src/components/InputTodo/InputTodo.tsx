@@ -6,7 +6,6 @@ const InputTodo = () => {
  const saveInputData = addTodo()
   const { register, handleSubmit, reset } = useForm<TodoValues>();
   const saveData: SubmitHandler<TodoValues> = (data) => {
-    console.log(data);
     saveInputData.mutate(data.title);
     reset();
   };
@@ -19,7 +18,8 @@ const InputTodo = () => {
 
       <input
         type="submit"
-        className="text-center w-[100px] border border-solid rounded-lg outline-none "
+        value="Add Todo"
+        className="text-center w-[100px] border border-solid rounded-lg outline-none"
       />
     </form>
   );
