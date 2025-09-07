@@ -17,9 +17,10 @@ const ListItemsTodo = () => {
             <input
               type="checkbox"
               checked={todo.completed}
+              className="mx-2"
               onChange={() => checkFn.mutate(todo)}
             />
-            <button onClick={() => deleteT.mutate(todo.id)}>
+            <button onClick={() => deleteT.mutate(todo.id)} className="border rounded-2xl px-2">
               {deleteT.isPending ? "Deleting..." : "Delete"}
             </button>
           </li>
