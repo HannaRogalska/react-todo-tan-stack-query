@@ -9,7 +9,7 @@ const ListItemsTodo = () => {
   if (isError) return <h1>Error...</h1>;
   
   return (
-    <ol className="list-decimal list-inside">
+    <ol className="list-decimal list-inside flex flex-col gap-2">
       {data?.map((todo) => {
         return (
           <li key={todo.id}>
