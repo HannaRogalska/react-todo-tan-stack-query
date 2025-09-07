@@ -10,9 +10,6 @@ const InputTodo = () => {
     saveInputData.mutate(data.title);
     reset();
   };
-  console.log(handleSubmit);
-  
-  
   return (
     <form onSubmit={handleSubmit(saveData)}>
       <input
